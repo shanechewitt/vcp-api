@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -r ts-node/register 'src/**/*.spec.ts'",
     "build": "tsc",
     "start": "node build/server.js",
     "dev": "nodemon --exec ts-node src/server.ts"
@@ -13,13 +13,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/chai": "^4.3.9",
     "@types/express": "^4.17.20",
+    "@types/mocha": "^10.0.3",
     "@types/node": "^20.8.10",
+    "@types/sinon": "^10.0.20",
+    "@types/supertest": "^2.0.15",
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
+    "sinon": "^17.0.1",
+    "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
