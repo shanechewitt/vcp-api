@@ -1,8 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import WikipediaSearchService from './services/wikipedia.service';
 
-// Services:
-
 const app: Express = express();
 const port: number | string = process.env.PORT || 3000;
 
