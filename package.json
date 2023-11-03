@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node build/server.js",
     "dev": "nodemon --exec ts-node src/server.ts",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm run build | mkdir ./.cache && mv /app/.cache/puppeteer ./.cache",
     "lint": "eslint ./**/*.ts",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
