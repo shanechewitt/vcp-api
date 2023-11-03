@@ -14,11 +14,19 @@ class WikipediaSearchService {
           format: "json",
         },
       });
-      const data = <WikipediaApiResponse>response.data;
-      return <WikipediaSummary>{
-        totalHits: data.query.searchinfo.totalhits,
-        firstHit: data.query.search[0].snippet.replace(/(<([^>]+)>)/gi, ""),
-      };
+      const data = <WikipediaApiResponse>response?.data;
+      if (data) {
+        return <WikipediaSummary>{
+          totalHits: data.query.searchinfo.totalhits,
+          firstHit: data.query.search[0].snippet.replace(/(<([^>]+)>)/gi, ""),
+        };
+      } else {
+        return <WikipediaSummary>{
+          totalHits: 0,
+          firstHit: `There was no hit for the query ${searchTerm} on the wikipedia api`
+        }
+      }
+      
     } catch (error) {
       console.error("Error fetching data from Wikipedia:", error);
       throw error;
