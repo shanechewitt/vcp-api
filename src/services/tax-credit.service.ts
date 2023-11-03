@@ -9,6 +9,7 @@ class MarylandTaxCreditService {
 
   public async getMarylandTaxCredits(res: Response): Promise<void> {
     const browser = await puppeteer.launch({
+      headless: "new",
       args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-gpu"],
     });
     const page = await browser.newPage();
