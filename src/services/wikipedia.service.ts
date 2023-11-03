@@ -15,7 +15,7 @@ class WikipediaSearchService {
         },
       });
       const data = <WikipediaApiResponse>response?.data;
-      if (data) {
+      if (data.query.search.length > 0) {
         return <WikipediaSummary>{
           totalHits: data.query.searchinfo.totalhits,
           firstHit: data.query.search[0].snippet.replace(/(<([^>]+)>)/gi, ""),
