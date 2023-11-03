@@ -9,7 +9,6 @@ class MarylandTaxCreditService {
 
   public async getMarylandTaxCredits(res: Response): Promise<void> {
     const browser = await puppeteer.launch({
-      headless: "new",
       executablePath:
         process.env.CHROME_BIN ||
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
