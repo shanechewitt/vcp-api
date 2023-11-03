@@ -13,7 +13,7 @@ class MarylandTaxCreditService {
       executablePath:
         process.env.CHROME_BIN ||
         "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      args: ["--no-sandbox", "--disable-gpu"],
+      args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-gpu"],
     });
     const page = await browser.newPage();
     await page.goto(this.baseUrl, { waitUntil: "networkidle0" });
