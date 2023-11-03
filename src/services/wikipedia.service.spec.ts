@@ -1,10 +1,10 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
-import axios from 'axios';
-import WikipediaSearchService from './wikipedia.service';
-import { WikipediaApiResponse, WikipediaSummary } from '../models/wikipedia';
+import { expect } from "chai";
+import sinon from "sinon";
+import axios from "axios";
+import WikipediaSearchService from "./wikipedia.service";
+import { WikipediaApiResponse, WikipediaSummary } from "../models/wikipedia";
 
-describe('WikipediaSearchService', () => {
+describe("WikipediaSearchService", () => {
   let sandbox: sinon.SinonSandbox;
   let service: WikipediaSearchService;
   let consoleErrorStub: sinon.SinonStub;
@@ -14,8 +14,11 @@ describe('WikipediaSearchService', () => {
       searchinfo: {
         totalhits: 7,
       },
-    search: [
-        { title: 'Test title', snippet: '<div>Test snippet for first hit</div>' },
+      search: [
+        {
+          title: "Test title",
+          snippet: "<div>Test snippet for first hit</div>",
+        },
       ],
     },
   };
@@ -23,7 +26,7 @@ describe('WikipediaSearchService', () => {
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     service = new WikipediaSearchService();
-    consoleErrorStub = sinon.stub(console, 'error');
+    consoleErrorStub = sinon.stub(console, "error");
   });
 
   afterEach(() => {
@@ -31,30 +34,30 @@ describe('WikipediaSearchService', () => {
     consoleErrorStub.restore();
   });
 
-  it('searchArticles returns data on valid search term', async () => {
+  it("searchArticles returns data on valid search term", async () => {
     // Arrange
-    const axiosStub = sandbox.stub(axios, 'get').resolves({ data: mockData });
+    const axiosStub = sandbox.stub(axios, "get").resolves({ data: mockData });
 
     // Act
-    const result = await service.searchArticles('Test title');
+    const result = await service.searchArticles("Test title");
 
     // Assert
     expect(axiosStub.calledOnce).to.be.true;
     expect(result).to.deep.equal(<WikipediaSummary>{
-        totalHits: 7,
-        firstHit: 'Test snippet for first hit'
+      totalHits: 7,
+      firstHit: "Test snippet for first hit",
     });
   });
 
-  it('searchArticles throws an error on invalid search term', async () => {
+  it("searchArticles throws an error on invalid search term", async () => {
     // Arrange
-    const errorMessage = 'Error fetching data from Wikipedia';
-    sandbox.stub(axios, 'get').rejects(new Error(errorMessage));
+    const errorMessage = "Error fetching data from Wikipedia";
+    sandbox.stub(axios, "get").rejects(new Error(errorMessage));
 
     try {
       // Act
-      await service.searchArticles('???');
-      expect.fail('Error fetching data from Wikipedia');
+      await service.searchArticles("???");
+      expect.fail("Error fetching data from Wikipedia");
     } catch (error) {
       // Assert
       expect((error as Error).message).to.equal(errorMessage);
